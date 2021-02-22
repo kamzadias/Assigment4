@@ -14,10 +14,7 @@ import java.util.List;
 public class MedicineController {
     @Inject
     private IMedicineRepository repo;
-    @GET
-    public String sayHello(){
-        return "Hello World!";
-    }
+
     @GET
     @Path("search/{name}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -36,31 +33,31 @@ public class MedicineController {
                 .build();
     }
 
-//    @GET
-//    @Path("/{id}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response getMedicineById(@PathParam("id") int id) {
-//        Medicine medicine;
-//        try {
-//            medicine = repo.getMedicineById(id);
-//        } catch (ServerErrorException ex) {
-//            return Response
-//                    .status(500).entity(ex.getMessage()).build();
-//        }
-//
-//        if (medicine == null) {
-//            return Response
-//                    .status(Response.Status.NOT_FOUND)
-//                    .entity("Medicine does not exist!")
-//                    .build();
-//        }
-//
-//        return Response
-//                .status(Response.Status.OK)
-//                .entity(medicine)
-//                .build();
-//    }
-//
+    @GET
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMedicineById(@PathParam("id") int id) {
+        Medicine medicine;
+        try {
+            medicine = repo.getMedicineById(id);
+        } catch (ServerErrorException ex) {
+            return Response
+                    .status(500).entity(ex.getMessage()).build();
+        }
+
+        if (medicine == null) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .entity("Medicine does not exist!")
+                    .build();
+        }
+
+        return Response
+                .status(Response.Status.OK)
+                .entity(medicine)
+                .build();
+    }
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -86,27 +83,27 @@ public class MedicineController {
                 .build();
 
 }
-//    @DELETE
-//    @Path("/{removebyid}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response removeMedicineById(@PathParam("removebyid") int id) {
-//        boolean removedByID;
-//        try {
-//            removedByID = repo.removeMedicineById(id);
-//        } catch (ServerErrorException ex) {
-//            return Response.serverError().entity(ex.getMessage()).build();
-//        }
-//
-//        if (!removedByID) {
-//            return Response
-//                    .status(Response.Status.BAD_REQUEST)
-//                    .entity("Medicine not removed.Please try again by following the instructions")
-//                    .build();
-//        }
-//
-//        return Response
-//                .status(Response.Status.CREATED)
-//                .entity("Medicine successfully removed!")
-//                .build();
-//    }
+    @DELETE
+    @Path("/{removebyid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response removeMedicineById(@PathParam("removebyid") int id) {
+        boolean removedByID;
+        try {
+            removedByID = repo.removeMedicineById(id);
+        } catch (ServerErrorException ex) {
+            return Response.serverError().entity(ex.getMessage()).build();
+        }
+
+        if (!removedByID) {
+            return Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .entity("Medicine not removed.Please try again by following the instructions")
+                    .build();
+        }
+
+        return Response
+                .status(Response.Status.CREATED)
+                .entity("Medicine successfully removed!")
+                .build();
+    }
 }

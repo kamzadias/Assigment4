@@ -14,7 +14,7 @@ public class Medicine {
 
     }
 
-    public Medicine(String name, double price, LocalDate expirationdate, String manufacturer, String restrictions) {
+    public Medicine(String name, double price, LocalDate expirationDate, String manufacturer, String restrictions) {
         this.name = name;
         this.price = price;
         this.expirationDate = expirationDate;
